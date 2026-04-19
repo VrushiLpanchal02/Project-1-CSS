@@ -587,3 +587,290 @@ nav ul a:focus {
   font-size: clamp(1.2rem, 3vw, 1.75rem);
 }
 
+
+/* 
+   FEATURES LIST
+   CSS Grid auto-fit so it adapts to screen width
+   automatically without needing media queries here
+   Reference: https://css-tricks.com/snippets/css/complete-guide-grid/
+    */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22ch, 1fr));
+  gap: 1em;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.features li {
+  display: grid;
+  position: relative;
+  place-content: center;
+  min-height: 11rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.features li:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.features li > span {
+  display: grid;
+  place-content: center;
+  padding: 0.5em;
+  gap: 0.5rem;
+  border: 1px solid var(--color-accent2);
+  border-radius: var(--radius);
+  background-color: rgba(74, 224, 171, 0.08);
+  line-height: 1.2;
+}
+
+.features li > span a {
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* full card clickable - stretch link trick */
+.features li > span a::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+}
+
+.features li > span a:hover {
+  color: var(--color-gold);
+}
+
+.features li > span span:nth-child(2) {
+  font-size: var(--size-sm);
+  color: var(--color-muted);
+}
+
+
+/* 
+   #STYLES section
+    */
+#styles {
+  margin: 4vh 0 16vh;
+  text-align: center;
+}
+
+#styles h2 {
+  color: var(--color-accent);
+  margin-bottom: 2rem;
+}
+
+/* subtle SVG pattern on style cards */
+#styles .features li,
+.features.patterned li {
+  background-color: var(--color-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='72' viewBox='0 0 36 72'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%234fc3f7' fill-opacity='0.07'%3E%3Cpath d='M2 6h12L8 18 2 6zm18 36h12l-6 12-6-12z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* if last card is odd on 2-col, let it span full width */
+@media (min-width: 515px) and (max-width: 765px) {
+  #styles .features li:nth-last-child(1):nth-child(odd),
+  .features.patterned li:nth-last-child(1):nth-child(odd) {
+    grid-column: span 2;
+  }
+}
+
+
+/* 
+   PROFILE SECTION
+    */
+.profile {
+  width: 95vw;
+  max-width: 80ch;
+  margin: 1rem auto 8vh;
+  padding: 1.25rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.profile h4 {
+  margin: 0 0 0.75rem;
+  color: var(--color-accent2);
+  text-align: center;
+  font-family: var(--font-heading);
+}
+
+.profile .container {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+}
+
+.profile .container > a {
+  min-height: 2.2em;
+  border: 2px solid var(--color-accent2);
+  color: var(--color-accent2);
+  background-color: transparent;
+  padding: 0.45em 1em;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.profile .container > a:hover,
+.profile .container > a:focus {
+  background-color: var(--color-accent2);
+  color: var(--color-btn-text);
+}
+
+.profile ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.profile ul li {
+  display: flex;
+  padding: 0.35em 0.6em;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius);
+  font-size: var(--size-sm);
+  gap: 0.25rem;
+}
+
+.profile ul li span:nth-child(1) {
+  font-weight: 600;
+  color: var(--color-muted);
+  width: auto;
+  margin-right: 0.25em;
+}
+
+.profile ul li span:nth-child(2) {
+  flex-grow: 1;
+  word-break: break-word;
+  color: var(--color-text);
+}
+
+.profile ul li span:nth-child(2) a {
+  color: var(--color-accent);
+}
+
+/* on very wide screens the profile floats to corner */
+@media (min-width: 180ch) {
+  .profile {
+    position: fixed;
+    right: 2vmin;
+    bottom: 2vmin;
+    max-width: 28ch;
+    margin-bottom: 0;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .profile ul {
+    justify-content: unset;
+  }
+
+  .profile ul li {
+    padding: 0;
+  }
+
+  .profile ul li span:nth-child(1) {
+    width: 8ch;
+    margin-right: 0;
+  }
+}
+
+
+/* 
+   PAGE FOOTER
+   Dark footer, grid layout for links
+    */
+.page-footer {
+  position: relative;
+  padding: 3rem 1rem;
+  background-color: var(--color-bg-alt);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+}
+
+/* S logo mark floats above the footer */
+.page-footer::before {
+  display: inline-grid;
+  min-height: 2em;
+  position: absolute;
+  left: 50%;
+  width: 2em;
+  transform: translate(-50%, -100%);
+  background-color: var(--color-bg-alt);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius);
+  color: var(--color-accent);
+  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  content: "S";
+  place-content: center;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.page-footer p:first-child {
+  margin-top: 2.5rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.page-footer p a {
+  color: var(--color-accent);
+}
+
+.page-footer ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12ch, auto));
+  gap: 1em;
+  margin: 0 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.page-footer [class^="link"] {
+  width: 100%;
+  min-height: 2.5em;
+  background-color: var(--color-surface);
+  color: var(--color-accent);
+  border: 1px solid var(--color-border);
+  font-size: var(--size-sm);
+}
+
+.page-footer [class^="link"]:hover,
+.page-footer [class^="link"]:focus {
+  background-color: var(--color-accent);
+  color: var(--color-btn-text);
+  border-color: var(--color-accent);
+}
+
+.page-footer .container > :last-child {
+  margin-bottom: 0;
+}
