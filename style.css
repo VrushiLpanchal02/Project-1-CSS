@@ -1,0 +1,367 @@
+/*
+  
+  Style Stage - Project 1
+  Student: Vrushil Panchal
+  Student Number: 200628377
+  Course: COMP1054
+ 
+
+  
+
+  Colours I picked:
+    Deep navy      #0d1b2a  - background
+    Off white      #e8f1fa  - text
+    Electric blue  #4fc3f7  - accent / links
+    Soft teal      #80cbc4  - secondary accent
+    Warm gold      #ffd54f  - highlight
+*/
+
+/* 
+   Google Fonts
+   Outfit for headings, Inter for body text
+   I picked these because they look clean together
+   Reference: https://fonts.google.com/
+    */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600&display=swap');
+
+
+/* 
+   CSS Custom Properties (variables)
+   I have all colours and sizing in one spot so changes
+   are easy to make later
+    */
+:root {
+  --color-bg:        #0d1b2a;
+  --color-bg-alt:    #112236;
+  --color-surface:   #162840;
+  --color-border:    #1e3a55;
+  --color-text:      #e8f1fa;
+  --color-muted:     #8aadcc;
+  --color-accent:    #4fc3f7;
+  --color-accent2:   #80cbc4;
+  --color-gold:      #ffd54f;
+  --color-link:      #4fc3f7;
+  --color-link-hover:#80cbc4;
+  --color-btn-bg:    #4fc3f7;
+  --color-btn-text:  #0d1b2a;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body:    'Inter', sans-serif;
+
+  --size-xs:   0.75rem;
+  --size-sm:   0.9rem;
+  --size-base: 1rem;
+  --size-md:   1.15rem;
+  --size-lg:   1.35rem;
+  --size-xl:   1.75rem;
+  --size-2xl:  2.5rem;
+  --size-3xl:  4rem;
+
+  --radius:    8px;
+  --radius-lg: 16px;
+  --shadow:    0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+
+  --max-width: 860px;
+  --gap:       1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  font-size: 100%;
+  overflow-x: hidden;
+  text-rendering: optimizeSpeed;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* reduce motion for people who prefer not to see it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* 
+   SKIP LINK
+   Hidden off screen, shows on keyboard focus
+   Important for accessibility
+    */
+.skip-link {
+  position: absolute;
+  top: auto;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  background-color: var(--color-accent);
+  color: var(--color-btn-text);
+  font-size: var(--size-md);
+  padding: 0;
+  z-index: 9999;
+}
+
+.skip-link:focus {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  padding: 0.6em 1em;
+  border-radius: 0 0 var(--radius) 0;
+}
+
+
+/* 
+   TYPOGRAPHY
+   Keeping the heading hierarchy clear so the page
+   reads naturally from top to bottom
+    */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  line-height: 1.1;
+  margin-bottom: 0.6em;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 6vw, var(--size-3xl));
+  font-weight: 800;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.5vw, var(--size-2xl));
+  font-weight: 600;
+  color: var(--color-accent2);
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2.5vw, var(--size-xl));
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+h4 {
+  font-size: var(--size-lg);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+p {
+  font-size: var(--size-md);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+li {
+  font-size: var(--size-md);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+/* spacing between consecutive list items */
+article .container > ul:not(.features) > li + li,
+article .container > ol > li + li {
+  margin-top: 0.75rem;
+}
+
+/* headings after content need extra space above */
+article .container * + h2 {
+  margin-top: 3.5rem;
+}
+
+article .container * + h3 {
+  margin-top: 2rem;
+}
+
+strong {
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+  color: var(--color-link-hover);
+  outline-offset: 3px;
+}
+
+
+/* 
+   BLOCKQUOTE
+   Left border style so it stands out from paragraphs
+   */
+blockquote {
+  position: relative;
+  margin: 2.5rem 0;
+  padding: 1.5rem 1.75rem;
+  background-color: var(--color-surface);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--color-accent2);
+  font-style: italic;
+}
+
+blockquote p {
+  font-size: var(--size-lg);
+  color: var(--color-accent2);
+  margin-bottom: 0;
+}
+
+blockquote p strong {
+  color: var(--color-accent);
+  font-style: normal;
+}
+
+
+/*
+   BUTTONS / LINK STYLES
+   Using the [class^="link"] selector to catch all
+   the link- classes in the HTML without changing HTML
+   Reference: https://css-tricks.com/css-basics-styling-links-like-boss/
+    */
+[class^="link"]:not(.link-codepen) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65em 1.4em;
+  background-color: var(--color-btn-bg);
+  color: var(--color-btn-text);
+  font-family: var(--font-heading);
+  font-size: var(--size-md);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius);
+  box-shadow: 0 3px 12px rgba(79, 195, 247, 0.25);
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  min-height: 2.8em;
+  line-height: 1;
+  text-align: center;
+}
+
+[class^="link"]:not(.link-codepen):hover,
+[class^="link"]:not(.link-codepen):focus {
+  background-color: var(--color-accent2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(128, 203, 196, 0.3);
+}
+
+[class^="link"]:not(.link-codepen):focus {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* codepen link is different text only style */
+.link-codepen {
+  display: inline-block;
+  color: var(--color-accent2);
+  font-size: var(--size-lg);
+  margin-top: 2rem;
+  text-decoration: none;
+  font-family: var(--font-heading);
+}
+
+.link-codepen:hover,
+.link-codepen:focus {
+  color: var(--color-gold);
+}
+
+.link-allstyles {
+  font-size: var(--size-lg);
+}
+
+/* github icon inside the link */
+.link-github svg {
+  width: 1em;
+  height: 1em;
+  margin-right: 0.4em;
+  fill: currentColor;
+}
+
+
+/* 
+   LAYOUT HELPERS
+   .container controls max-width and centers content
+   on wider screens
+    */
+article .container,
+.page-footer .container,
+#styles .container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 1rem;
+}
+
+article,
+#styles {
+  padding: 1rem;
+}
+
+article section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+
+main {
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
+
+main:focus {
+  outline: none;
+}
+
+main h3 {
+  color: var(--color-accent);
+}
