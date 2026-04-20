@@ -874,3 +874,120 @@ nav ul a:focus {
 .page-footer .container > :last-child {
   margin-bottom: 0;
 }
+
+
+/* 
+   responsive layout
+   Mobile first approach - default styles work on
+   small screens, then I add adjustments as screens
+   get bigger
+
+   Breakpoints:
+   400px  - very small phones
+   768px  - tablets
+   1024px - laptops / desktops
+   1200px - wide desktops
+
+   Reference: MDN media queries
+   https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries
+   */
+
+/* very small phones */
+@media (max-width: 400px) {
+  :root {
+    --gap: 1rem;
+  }
+
+  header {
+    padding: 6vh 1rem 3vh;
+    min-height: 40vh;
+  }
+
+  nav ul a {
+    padding: 0.45rem 0.65rem;
+    font-size: var(--size-sm);
+  }
+
+  .link-allstyles {
+    margin-left: 0;
+  }
+
+  blockquote {
+    padding: 1rem 1.2rem;
+  }
+}
+
+/* tablets */
+@media (min-width: 768px) {
+  :root {
+    --gap: 2rem;
+  }
+
+  header {
+    min-height: 55vh;
+    padding: 10vh 3rem 5vh;
+  }
+
+  .features {
+    grid-template-columns: repeat(auto-fit, minmax(26ch, 1fr));
+  }
+
+  article section {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+
+  main {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+
+  #contribute section {
+    padding: 2.5rem;
+  }
+
+  .profile .container {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+/* laptops and desktops */
+@media (min-width: 1024px) {
+  :root {
+    --max-width: 900px;
+  }
+
+  header {
+    min-height: 60vh;
+  }
+
+  header h1 {
+    font-size: var(--size-3xl);
+  }
+
+  nav ul a {
+    font-size: var(--size-md);
+    padding: 0.55rem 1rem;
+  }
+
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  article .container,
+  .page-footer .container,
+  #styles .container {
+    padding: 0 2rem;
+  }
+}
+
+/* wide desktops */
+@media (min-width: 1200px) {
+  nav ul {
+    gap: 0.5rem;
+  }
+
+  nav ul a {
+    padding: 0.6rem 1.1rem;
+  }
+}
